@@ -1,0 +1,358 @@
+/* pages/alert-manage/alert-manage.wxss */
+
+.container {
+  background: #f5f5f5;
+  min-height: 100vh;
+  padding-bottom: 120rpx;
+}
+
+/* 统计头部 */
+.stats-header {
+  margin: 20rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 30rpx;
+  background: linear-gradient(135deg, #1565C0 0%, #1976D2 100%);
+  color: #ffffff;
+}
+
+.stats-item {
+  text-align: center;
+  flex: 1;
+}
+
+.stats-number {
+  font-size: 48rpx;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.stats-label {
+  font-size: 24rpx;
+  opacity: 0.9;
+}
+
+.stats-divider {
+  width: 1rpx;
+  height: 60rpx;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 筛选选项 */
+.filter-options {
+  padding: 20rpx;
+  background: #ffffff;
+  margin: 20rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
+}
+
+.filter-tabs {
+  display: flex;
+  background: #f8f9fa;
+  border-radius: 25rpx;
+  padding: 6rpx;
+}
+
+.filter-tab {
+  flex: 1;
+  text-align: center;
+  padding: 15rpx 20rpx;
+  font-size: 26rpx;
+  color: #666;
+  border-radius: 20rpx;
+  transition: all 0.3s;
+}
+
+.filter-tab.active {
+  background: #1565C0;
+  color: #ffffff;
+}
+
+/* 提醒列表 */
+.alerts-list {
+  padding: 0 20rpx;
+}
+
+.alert-card {
+  background: #ffffff;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
+  margin-bottom: 20rpx;
+  padding: 30rpx;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+/* 提醒头部 */
+.alert-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 25rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.alert-info {
+  flex: 1;
+}
+
+.stock-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.stock-codes {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.alert-status {
+  margin-left: 20rpx;
+}
+
+/* 提醒条件 */
+.alert-conditions {
+  margin-bottom: 25rpx;
+}
+
+.premium-condition,
+.price-conditions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15rpx;
+}
+
+.condition-tag {
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.condition-tag.premium {
+  background: #17a2b8;
+}
+
+.condition-tag.price {
+  background: #28a745;
+}
+
+.condition-text {
+  font-size: 26rpx;
+  color: #333;
+  background: #f8f9fa;
+  padding: 10rpx 20rpx;
+  border-radius: 20rpx;
+}
+
+.price-targets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+}
+
+.target-item {
+  font-size: 24rpx;
+  color: #333;
+  background: #f8f9fa;
+  padding: 8rpx 16rpx;
+  border-radius: 16rpx;
+}
+
+/* 提醒设置 */
+.alert-settings {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+}
+
+.setting-item {
+  text-align: center;
+  flex: 1;
+}
+
+.setting-label {
+  font-size: 22rpx;
+  color: #666;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.setting-value {
+  font-size: 24rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+/* 提醒历史 */
+.alert-history {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25rpx;
+  padding: 15rpx 20rpx;
+  background: #fff3cd;
+  border-radius: 8rpx;
+  border-left: 4rpx solid #ffc107;
+}
+
+.history-label,
+.history-count {
+  font-size: 22rpx;
+  color: #856404;
+}
+
+/* 操作按钮 */
+.alert-actions {
+  display: flex;
+  gap: 15rpx;
+  justify-content: flex-end;
+}
+
+.action-btn-small {
+  padding: 15rpx 25rpx;
+  border-radius: 25rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.action-btn-small.secondary {
+  background: #6c757d;
+  color: #ffffff;
+}
+
+.action-btn-small.danger {
+  background: #dc3545;
+  color: #ffffff;
+}
+
+.action-btn-small:active {
+  transform: scale(0.95);
+}
+
+/* 添加提醒按钮 */
+.add-alert-btn {
+  position: fixed;
+  right: 30rpx;
+  bottom: 120rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background: #1565C0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(21, 101, 192, 0.3);
+  z-index: 100;
+}
+
+.add-icon {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 100rpx 40rpx;
+}
+
+.empty-icon {
+  width: 120rpx;
+  height: 120rpx;
+  margin: 0 auto 30rpx;
+  opacity: 0.3;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+  line-height: 1.6;
+  margin-bottom: 40rpx;
+}
+
+.empty-action {
+  display: flex;
+  justify-content: center;
+}
+
+.action-btn {
+  padding: 25rpx 50rpx;
+  border-radius: 50rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.action-btn.primary {
+  background: #1565C0;
+  color: #ffffff;
+}
+
+/* 加载状态 */
+.loading {
+  text-align: center;
+  padding: 100rpx 40rpx;
+  color: #666;
+  font-size: 28rpx;
+}
+
+/* 响应式适配 */
+@media (max-width: 750rpx) {
+  .alert-settings {
+    flex-direction: column;
+    gap: 15rpx;
+  }
+  
+  .setting-item {
+    text-align: left;
+  }
+  
+  .alert-history {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10rpx;
+  }
+  
+  .alert-actions {
+    justify-content: center;
+  }
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stats-header {
+  animation: slideInDown 0.4s ease-out;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

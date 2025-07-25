@@ -1,0 +1,503 @@
+/* pages/detail/detail.wxss */
+
+.container {
+  background: #f5f5f5;
+  min-height: 100vh;
+  padding-bottom: 120rpx;
+}
+
+/* 头部卡片 */
+.header-card {
+  margin: 20rpx;
+  background: linear-gradient(135deg, #1565C0 0%, #1976D2 100%);
+  color: #ffffff;
+}
+
+.stock-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.stock-info {
+  flex: 1;
+}
+
+.stock-name {
+  font-size: 36rpx;
+  font-weight: 700;
+  margin-bottom: 10rpx;
+  display: block;
+}
+
+.stock-codes {
+  font-size: 26rpx;
+  opacity: 0.9;
+}
+
+.favorite-btn {
+  padding: 10rpx;
+}
+
+.favorite-icon {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+/* 价格对比卡片 */
+.price-compare-card {
+  margin: 20rpx;
+}
+
+.compare-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #e9ecef;
+}
+
+.compare-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.update-time {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.price-comparison {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price-column {
+  flex: 1;
+  text-align: center;
+  padding: 30rpx 20rpx;
+  background: #f8f9fa;
+  border-radius: 16rpx;
+  margin: 0 10rpx;
+}
+
+.price-column:first-child {
+  margin-left: 0;
+}
+
+.price-column:last-child {
+  margin-right: 0;
+}
+
+.market-label {
+  font-size: 24rpx;
+  color: #666;
+  display: block;
+  margin-bottom: 15rpx;
+}
+
+.price-value {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #333;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.price-unit {
+  font-size: 24rpx;
+  color: #666;
+  display: block;
+  margin-bottom: 15rpx;
+}
+
+.price-change {
+  font-size: 26rpx;
+  font-weight: 600;
+}
+
+.price-change.positive {
+  color: #dc3545;
+}
+
+.price-change.negative {
+  color: #28a745;
+}
+
+.vs-divider {
+  width: 80rpx;
+  height: 80rpx;
+  background: #1565C0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 20rpx;
+}
+
+.vs-text {
+  color: #ffffff;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+/* 汇率转换卡片 */
+.exchange-card {
+  margin: 20rpx;
+}
+
+.exchange-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.exchange-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.exchange-rate {
+  font-size: 24rpx;
+  color: #1565C0;
+  font-weight: 600;
+}
+
+.exchange-content {
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  padding: 25rpx;
+}
+
+.exchange-text {
+  font-size: 26rpx;
+  color: #333;
+  display: block;
+  margin-bottom: 15rpx;
+}
+
+.price-diff {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 溢价率卡片 */
+.premium-card {
+  margin: 20rpx;
+}
+
+.premium-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.premium-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.premium-formula {
+  padding: 10rpx;
+}
+
+.info-icon {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.premium-display {
+  text-align: center;
+  padding: 40rpx 20rpx;
+  background: #f8f9fa;
+  border-radius: 16rpx;
+  margin-bottom: 30rpx;
+}
+
+.premium-value {
+  font-size: 72rpx;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 15rpx;
+}
+
+.premium-positive {
+  color: #dc3545;
+}
+
+.premium-negative {
+  color: #28a745;
+}
+
+.premium-neutral {
+  color: #6c757d;
+}
+
+.premium-description {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.premium-analysis {
+  background: #fff3cd;
+  border-radius: 12rpx;
+  padding: 25rpx;
+  border-left: 6rpx solid #ffc107;
+}
+
+.analysis-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.analysis-label {
+  font-size: 26rpx;
+  color: #856404;
+  font-weight: 600;
+}
+
+.analysis-value {
+  font-size: 26rpx;
+  color: #856404;
+}
+
+/* 趋势卡片 */
+.trend-card {
+  margin: 20rpx;
+}
+
+.trend-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.trend-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.trend-period {
+  display: flex;
+  background: #f8f9fa;
+  border-radius: 25rpx;
+  padding: 6rpx;
+}
+
+.period-item {
+  padding: 12rpx 20rpx;
+  font-size: 24rpx;
+  color: #666;
+  border-radius: 20rpx;
+  transition: all 0.3s;
+}
+
+.period-item.active {
+  background: #1565C0;
+  color: #ffffff;
+}
+
+.trend-chart {
+  height: 300rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-placeholder {
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* 操作按钮 */
+.action-buttons {
+  display: flex;
+  gap: 20rpx;
+  padding: 0 20rpx;
+  margin-top: 30rpx;
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25rpx;
+  border-radius: 50rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.action-btn.primary {
+  background: #1565C0;
+  color: #ffffff;
+}
+
+.action-btn.secondary {
+  background: #ffffff;
+  color: #1565C0;
+  border: 2rpx solid #1565C0;
+}
+
+.action-btn:active {
+  transform: scale(0.98);
+}
+
+.btn-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 15rpx;
+}
+
+/* 公式弹窗 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formula-modal {
+  width: 85%;
+  background: #ffffff;
+  border-radius: 20rpx;
+  overflow: hidden;
+  animation: slideInUp 0.3s ease-out;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #e9ecef;
+  background: #f8f9fa;
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.close-btn {
+  padding: 10rpx;
+}
+
+.close-icon {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.formula-content {
+  padding: 40rpx 30rpx;
+}
+
+.formula-text {
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.formula {
+  font-size: 30rpx;
+  color: #1565C0;
+  font-weight: 600;
+  background: #f0f8ff;
+  padding: 25rpx;
+  border-radius: 12rpx;
+  border-left: 6rpx solid #1565C0;
+}
+
+.formula-explanation {
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  padding: 25rpx;
+}
+
+.explanation-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.explanation-item {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+/* 响应式适配 */
+@media (max-width: 750rpx) {
+  .price-comparison {
+    flex-direction: column;
+  }
+  
+  .price-column {
+    margin: 10rpx 0;
+    width: 100%;
+  }
+  
+  .vs-divider {
+    margin: 20rpx 0;
+    transform: rotate(90deg);
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .action-btn {
+    margin-bottom: 15rpx;
+  }
+}
+
+/* 动画效果 */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(100rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

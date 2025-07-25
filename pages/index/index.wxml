@@ -1,0 +1,174 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+  <!-- 搜索栏 -->
+  <view class="search-container">
+    <view class="search-box">
+      <text class="search-icon">🔍</text>
+      <input class="search-input" 
+             placeholder="搜索股票代码或名称" 
+             value="{{searchKeyword}}" 
+             bindinput="onSearchInput"
+             bindconfirm="onSearchConfirm" />
+      <view class="search-btn" bindtap="onSearchBtnTap">搜索</view>
+    </view>
+  </view>
+
+  <!-- 汇率信息 -->
+  <view class="exchange-rate-card card">
+    <view class="rate-header">
+      <text class="rate-title">港币汇率</text>
+      <text class="rate-time">{{exchangeRateTime}}</text>
+    </view>
+    <view class="rate-content">
+      <text class="rate-value">1 HKD = {{exchangeRate}} CNY</text>
+      <view class="refresh-btn" bindtap="refreshExchangeRate">
+        <view class="refresh-icon"></view>
+      </view>
+    </view>
+  </view>
+
+
+  <!-- 搜索结果 -->
+  <view wx:if="{{showSearchResults}}" class="search-results-section">
+    <view class="section-header">
+      <text class="section-title">搜索结果</text>
+      <text class="clear-search" bindtap="clearSearch">清除</text>
+    </view>
+    
+    <view wx:if="{{searchLoading}}" class="loading">
+      <text>搜索中...</text>
+    </view>
+    
+    <view wx:elif="{{searchResults.length === 0}}" class="empty-state">
+      <text class="empty-text">未找到相关股票</text>
+    </view>
+    
+    <view wx:else>
+      <view wx:for="{{searchResults}}" wx:key="code" class="search-result-item" bindtap="addStockPair" data-stock="{{item}}">
+        <view class="result-info">
+          <text class="result-name">{{item.name}}</text>
+          <text class="result-code">{{item.code}} / {{item.aCode}}</text>
+          <view wx:if="{{item.hPrice}}" class="result-prices">
+            <text class="result-price">H股: {{item.hPrice}} HKD</text>
+            <text class="result-price">A股: {{item.aPrice}} CNY</text>
+            <text class="result-premium">溢价率: {{item.premiumRate}}%</text>
+          </view>
+        </view>
+        <view class="add-btn">添加</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 股票列表 -->
+  <view class="stock-list">
+    <view wx:if="{{loading}}" class="loading">
+      <text>加载中...</text>
+    </view>
+    
+    <view wx:elif="{{stockPairs.length === 0 && !showSearchResults}}" class="empty-state">
+      <text class="empty-icon">📊</text>
+      <text class="empty-text">暂无股票数据\n点击搜索添加关注的股票</text>
+    </view>
+    
+    <view wx:else>
+      <view wx:for="{{stockPairs}}" wx:key="id" class="stock-card" bindtap="goToDetail" data-stock="{{item}}">
+        <!-- 股票头部信息 -->
+        <view class="stock-header">
+          <view class="stock-info">
+            <text class="stock-name">{{item.name}}</text>
+            <text class="stock-code">{{item.hCode}} / {{item.aCode}}</text>
+          </view>
+          <view class="favorite-btn" bindtap="toggleFavorite" data-stock="{{item}}" catchtap="">
+            <text class="favorite-icon">{{item.isFavorite ? '⭐' : '☆'}}</text>
+          </view>
+        </view>
+
+        <!-- 价格信息 -->
+        <view class="stock-prices">
+          <view class="price-item">
+            <text class="price-label">H股价格</text>
+            <text class="price-value">{{item.hPrice}} HKD</text>
+          </view>
+          <view class="price-item">
+            <text class="price-label">A股价格</text>
+            <text class="price-value">{{item.aPrice}} CNY</text>
+          </view>
+        </view>
+
+        <!-- 溢价率 -->
+        <view class="premium-rate">
+          <text class="premium-label">HA溢价率</text>
+          <text class="premium-value {{item.premiumRateClass}}">
+            {{item.premiumRate >= 0 ? '+' : ''}}{{item.premiumRate}}%
+          </text>
+        </view>
+
+        <!-- 更新时间 -->
+        <view class="update-time">
+          <text>更新时间: {{item.updateTime}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+<!-- 搜索结果弹窗 -->
+<view wx:if="{{showSearchModal}}" class="modal-overlay" bindtap="hideSearchModal">
+  <view class="search-modal" catchtap="">
+    <view class="modal-header">
+      <text class="modal-title">搜索股票</text>
+      <view class="close-btn" bindtap="hideSearchModal">
+        <text class="close-icon">✕</text>
+      </view>
+    </view>
+    
+    <view class="search-content">
+      <view class="search-input-container">
+        <input class="modal-search-input" 
+               placeholder="输入股票代码或名称" 
+               value="{{searchKeyword}}" 
+               bindinput="onModalSearchInput"
+               bindconfirm="searchStocks" />
+        <view class="search-btn" bindtap="searchStocks">搜索</view>
+      </view>
+      
+      <!-- 搜索历史 -->
+      <view wx:if="{{searchHistory.length > 0 && searchResults.length === 0}}" class="search-history">
+        <view class="history-header">
+          <text class="history-title">搜索历史</text>
+          <text class="clear-history" bindtap="clearSearchHistory">清空</text>
+        </view>
+        <view class="history-list">
+          <text wx:for="{{searchHistory}}" wx:key="*this" 
+                class="history-item" 
+                bindtap="selectSearchHistory" 
+                data-keyword="{{item}}">{{item}}</text>
+        </view>
+      </view>
+      
+      <!-- 搜索结果 -->
+      <view wx:if="{{searchResults.length > 0}}" class="search-results">
+        <view wx:for="{{searchResults}}" wx:key="code" 
+              class="search-result-item" 
+              bindtap="addStockPair" 
+              data-stock="{{item}}">
+          <view class="result-info">
+            <text class="result-name">{{item.name}}</text>
+            <text class="result-code">{{item.code}} / {{item.aCode}}</text>
+          </view>
+          <view class="add-btn">添加</view>
+        </view>
+      </view>
+      
+      <!-- 搜索状态 -->
+      <view wx:if="{{searchLoading}}" class="search-loading">
+        <text>搜索中...</text>
+      </view>
+      
+      <view wx:if="{{searchKeyword && searchResults.length === 0 && !searchLoading}}" class="no-results">
+        <text>未找到相关股票</text>
+      </view>
+    </view>
+  </view>
+</view>

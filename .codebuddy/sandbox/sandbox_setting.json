@@ -1,0 +1,20 @@
+{
+  "path": "/Users/hejunyi/code/stock-app",
+  "desc": "这是一个股票HA溢价率查询微信小程序项目，采用现代简约的UI设计风格，提供股票溢价率查询、收藏管理、价格预警等功能",
+  "id": "ff9e75e487d34a3080cfd83bc759de8e",
+  "data": {
+    "spaceKey": "ff9e75e487d34a3080cfd83bc759de8e",
+    "connections": {
+      "webIDE": "https://ff9e75e487d34a3080cfd83bc759de8e.ap-singapore.cloudstudio.club",
+      "preview": "",
+      "api": "https://ff9e75e487d34a3080cfd83bc759de8e--api.ap-singapore.cloudstudio.club",
+      "pty": "https://ff9e75e487d34a3080cfd83bc759de8e--pty.ap-singapore.cloudstudio.club"
+    }
+  },
+  "config": {
+    "api": "https://ff9e75e487d34a3080cfd83bc759de8e--api.ap-singapore.cloudstudio.club",
+    "pty": "https://ff9e75e487d34a3080cfd83bc759de8e--pty.ap-singapore.cloudstudio.club",
+    "region": "ap-shanghai",
+    "spaceKey": "ff9e75e487d34a3080cfd83bc759de8e"
+  }
+}

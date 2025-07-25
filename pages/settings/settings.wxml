@@ -1,0 +1,221 @@
+<!--pages/settings/settings.wxml-->
+<view class="container">
+  <!-- 用户信息卡片 -->
+  <view class="user-card card">
+    <view class="user-avatar">
+      <text class="avatar-img">👤</text>
+    </view>
+    <view class="user-info">
+      <text class="user-name">股票投资者</text>
+      <text class="user-desc">专注HA股溢价率分析</text>
+    </view>
+  </view>
+
+  <!-- 数据设置 -->
+  <view class="settings-section">
+    <view class="section-title">
+      <text>数据设置</text>
+    </view>
+    
+    <view class="settings-list">
+      <view class="setting-item" bindtap="showRefreshIntervalPicker">
+        <view class="setting-info">
+          <text class="setting-label">刷新间隔</text>
+          <text class="setting-desc">数据自动刷新频率</text>
+        </view>
+        <view class="setting-value">
+          <text>{{refreshIntervalText}}</text>
+          <text class="arrow-icon">→</text>
+        </view>
+      </view>
+      
+      <view class="setting-item">
+        <view class="setting-info">
+          <text class="setting-label">实时推送</text>
+          <text class="setting-desc">价格变动实时通知</text>
+        </view>
+        <view class="setting-value">
+          <switch checked="{{settings.realTimePush}}" bindchange="onRealTimePushChange" color="#1565C0"/>
+        </view>
+      </view>
+      
+      <view class="setting-item">
+        <view class="setting-info">
+          <text class="setting-label">WiFi下自动刷新</text>
+          <text class="setting-desc">仅在WiFi环境下自动刷新</text>
+        </view>
+        <view class="setting-value">
+          <switch checked="{{settings.wifiAutoRefresh}}" bindchange="onWifiAutoRefreshChange" color="#1565C0"/>
+        </view>
+      </view>
+      
+      <view class="setting-item" bindtap="showExchangeRateInput">
+        <view class="setting-info">
+          <text class="setting-label">汇率设置</text>
+          <text class="setting-desc">港币兑人民币汇率</text>
+        </view>
+        <view class="setting-value">
+          <text>{{settings.exchangeRate}}</text>
+          <text class="arrow-icon">→</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提醒设置 -->
+  <view class="settings-section">
+    <view class="section-title">
+      <text>提醒设置</text>
+    </view>
+    
+    <view class="settings-list">
+      <view class="setting-item">
+        <view class="setting-info">
+          <text class="setting-label">溢价率变化率提醒</text>
+          <text class="setting-desc">溢价率变化超过阈值时提醒</text>
+        </view>
+        <view class="setting-value">
+          <switch checked="{{settings.premiumAlert}}" bindchange="onPremiumAlertChange" color="#5A67D8"/>
+        </view>
+      </view>
+      
+      <view class="setting-item" bindtap="showAlertThresholdPicker">
+        <view class="setting-info">
+          <text class="setting-label">变化率阈值</text>
+          <text class="setting-desc">溢价率变化率提醒的百分比阈值</text>
+        </view>
+        <view class="setting-value">
+          <text>{{settings.alertThreshold}}%</text>
+          <text class="arrow-icon">→</text>
+        </view>
+      </view>
+      
+      <view class="setting-item" bindtap="goToAlertManage">
+        <view class="setting-info">
+          <text class="setting-label">提醒管理</text>
+          <text class="setting-desc">查看和管理所有溢价率变化率提醒</text>
+        </view>
+        <view class="setting-value">
+          <text class="alert-count">{{alertCount}}条</text>
+          <text class="arrow-icon">→</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 显示设置 -->
+  <view class="settings-section">
+    <view class="section-title">
+      <text>显示设置</text>
+    </view>
+    
+    <view class="settings-list">
+      <view class="setting-item" bindtap="showThemePicker">
+        <view class="setting-info">
+          <text class="setting-label">主题模式</text>
+          <text class="setting-desc">选择应用主题</text>
+        </view>
+        <view class="setting-value">
+          <text>{{themeText}}</text>
+          <text class="arrow-icon">→</text>
+        </view>
+      </view>
+      
+      <view class="setting-item">
+        <view class="setting-info">
+          <text class="setting-label">显示小数位</text>
+          <text class="setting-desc">价格显示的小数位数</text>
+        </view>
+        <view class="setting-value">
+          <text>{{settings.decimalPlaces}}位</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 其他设置 -->
+  <view class="settings-section">
+    <view class="section-title">
+      <text>其他</text>
+    </view>
+    
+    <view class="settings-list">
+      <view class="setting-item" bindtap="goToAPIStatus">
+        <view class="setting-info">
+          <text class="setting-label">API状态</text>
+          <text class="setting-desc">查看数据接口状态和性能</text>
+        </view>
+        <view class="setting-value">
+          <text class="arrow-icon">→</text>
+        </view>
+      </view>
+      
+      <view class="setting-item" bindtap="clearCache">
+        <view class="setting-info">
+          <text class="setting-label">清除缓存</text>
+          <text class="setting-desc">清除应用缓存数据</text>
+        </view>
+        <view class="setting-value">
+          <text class="cache-size">{{cacheSize}}</text>
+          <text class="arrow-icon">→</text>
+        </view>
+      </view>
+      
+      <view class="setting-item" bindtap="showAbout">
+        <view class="setting-info">
+          <text class="setting-label">关于应用</text>
+          <text class="setting-desc">版本信息和使用说明</text>
+        </view>
+        <view class="setting-value">
+          <text class="arrow-icon">→</text>
+        </view>
+      </view>
+      
+      <view class="setting-item" bindtap="showFeedback">
+        <view class="setting-info">
+          <text class="setting-label">意见反馈</text>
+          <text class="setting-desc">提交问题和建议</text>
+        </view>
+        <view class="setting-value">
+          <text class="arrow-icon">→</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 刷新间隔选择器 -->
+<picker wx:if="{{showRefreshPicker}}" 
+        mode="selector"
+        range="{{refreshIntervals}}" 
+        range-key="text"
+        value="{{refreshIntervalIndex}}"
+        bindchange="onRefreshIntervalChange"
+        bindcancel="hideRefreshIntervalPicker">
+  <view class="picker-content">选择刷新间隔</view>
+</picker>
+
+<!-- 提醒阈值选择器 -->
+<view wx:if="{{showThresholdPicker}}" class="picker-mask" bindtap="hideAlertThresholdPicker">
+  <view class="picker-container" catchtap="">
+    <view class="picker-header">
+      <text class="picker-cancel" bindtap="hideAlertThresholdPicker">取消</text>
+      <text class="picker-title">选择提醒阈值</text>
+      <text class="picker-confirm" bindtap="confirmAlertThreshold">确定</text>
+    </view>
+    <picker-view class="picker-view" value="{{[alertThresholdIndex]}}" bindchange="onAlertThresholdPickerChange">
+      <picker-view-column>
+        <view wx:for="{{alertThresholdTexts}}" wx:key="index" class="picker-item">{{item}}</view>
+      </picker-view-column>
+    </picker-view>
+  </view>
+</view>
+
+<!-- 主题选择器 -->
+<picker wx:if="{{showThemePicker}}" 
+        range="{{themes}}" 
+        range-key="text"
+        value="{{themeIndex}}"
+        bindchange="onThemeChange"
+        bindcancel="hideThemePicker">
+</picker>

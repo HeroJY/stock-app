@@ -1,0 +1,142 @@
+<!--pages/detail/detail.wxml-->
+<view class="container">
+  <!-- 头部信息 -->
+  <view class="header-card card">
+    <view class="stock-header">
+      <view class="stock-info">
+        <text class="stock-name">{{stockInfo.name}}</text>
+        <text class="stock-codes">{{stockInfo.hCode}} / {{stockInfo.aCode}}</text>
+      </view>
+      <view class="favorite-btn" bindtap="toggleFavorite">
+        <text class="favorite-icon">{{stockInfo.isFavorite ? '⭐' : '☆'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 价格对比 -->
+  <view class="price-compare-card card">
+    <view class="compare-header">
+      <text class="compare-title">价格对比</text>
+      <text class="update-time">{{stockInfo.updateTime}}</text>
+    </view>
+    
+    <view class="price-comparison">
+      <view class="price-column">
+        <text class="market-label">H股 (港股)</text>
+        <text class="price-value">{{stockInfo.hPrice}}</text>
+        <text class="price-unit">HKD</text>
+        <text class="price-change {{stockInfo.hChange >= 0 ? 'positive' : 'negative'}}">
+          {{stockInfo.hChange >= 0 ? '+' : ''}}{{stockInfo.hChangePercent}}%
+        </text>
+      </view>
+      
+      <view class="vs-divider">
+        <text class="vs-text">VS</text>
+      </view>
+      
+      <view class="price-column">
+        <text class="market-label">A股 (沪深)</text>
+        <text class="price-value">{{stockInfo.aPrice}}</text>
+        <text class="price-unit">CNY</text>
+        <text class="price-change {{stockInfo.aChange >= 0 ? 'positive' : 'negative'}}">
+          {{stockInfo.aChange >= 0 ? '+' : ''}}{{stockInfo.aChangePercent}}%
+        </text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 汇率转换 -->
+  <view class="exchange-card card">
+    <view class="exchange-header">
+      <text class="exchange-title">汇率转换</text>
+      <text class="exchange-rate">1 HKD = {{exchangeRate}} CNY</text>
+    </view>
+    <view class="exchange-content">
+      <text class="exchange-text">H股价格转换为人民币: {{hPriceInCNY}} CNY</text>
+      <text class="price-diff">与A股价差: {{priceDiff}} CNY</text>
+    </view>
+  </view>
+
+  <!-- HA溢价率 -->
+  <view class="premium-card card">
+    <view class="premium-header">
+      <text class="premium-title">HA溢价率</text>
+      <view class="premium-formula" bindtap="showFormulaDetail">
+        <text class="info-icon">ℹ️</text>
+      </view>
+    </view>
+    
+    <view class="premium-display">
+      <text class="premium-value {{stockInfo.premiumRateClass}}">
+        {{stockInfo.premiumRate >= 0 ? '+' : ''}}{{stockInfo.premiumRate}}%
+      </text>
+      <text class="premium-description">
+        {{stockInfo.premiumRate > 0 ? 'H股相对A股溢价' : stockInfo.premiumRate < 0 ? 'H股相对A股折价' : '价格基本一致'}}
+      </text>
+    </view>
+    
+    <view class="premium-analysis">
+      <view class="analysis-item">
+        <text class="analysis-label">投资建议</text>
+        <text class="analysis-value">{{investmentAdvice}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 历史趋势 -->
+  <view class="trend-card card">
+    <view class="trend-header">
+      <text class="trend-title">溢价率趋势</text>
+      <view class="trend-period">
+        <text class="period-item {{selectedPeriod === '1d' ? 'active' : ''}}" 
+              bindtap="changePeriod" data-period="1d">1天</text>
+        <text class="period-item {{selectedPeriod === '1w' ? 'active' : ''}}" 
+              bindtap="changePeriod" data-period="1w">1周</text>
+        <text class="period-item {{selectedPeriod === '1m' ? 'active' : ''}}" 
+              bindtap="changePeriod" data-period="1m">1月</text>
+      </view>
+    </view>
+    
+    <view class="trend-chart">
+      <!-- 这里可以集成图表组件 -->
+      <view class="chart-placeholder">
+        <text>图表功能开发中...</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-buttons">
+    <view class="action-btn secondary" bindtap="setAlert">
+      <text class="btn-icon">🔔</text>
+      <text>设置提醒</text>
+    </view>
+    <view class="action-btn primary" bindtap="refreshData">
+      <text class="btn-icon">🔄</text>
+      <text>刷新数据</text>
+    </view>
+  </view>
+</view>
+
+<!-- 公式说明弹窗 -->
+<view wx:if="{{showFormulaModal}}" class="modal-overlay" bindtap="hideFormulaModal">
+  <view class="formula-modal" catchtap="true">
+    <view class="modal-header">
+      <text class="modal-title">HA溢价率计算公式</text>
+      <view class="close-btn" bindtap="hideFormulaModal">
+        <text class="close-icon">✕</text>
+      </view>
+    </view>
+    <view class="formula-content">
+      <view class="formula-text">
+        <text class="formula">HA溢价率 = (H股价格 × 汇率 - A股价格) ÷ A股价格 × 100%</text>
+      </view>
+      <view class="formula-explanation">
+        <text class="explanation-title">说明：</text>
+        <text class="explanation-item">• 正值表示H股相对A股溢价</text>
+        <text class="explanation-item">• 负值表示H股相对A股折价</text>
+        <text class="explanation-item">• 汇率采用实时港币对人民币汇率</text>
+      </view>
+    </view>
+  </view>
+</view>

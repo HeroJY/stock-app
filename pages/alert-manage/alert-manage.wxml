@@ -1,0 +1,128 @@
+<!--pages/alert-manage/alert-manage.wxml-->
+<view class="container">
+  <!-- 头部统计 -->
+  <view class="stats-header card">
+    <view class="stats-item">
+      <text class="stats-number">{{totalAlerts}}</text>
+      <text class="stats-label">总提醒</text>
+    </view>
+    <view class="stats-divider"></view>
+    <view class="stats-item">
+      <text class="stats-number">{{activeAlerts}}</text>
+      <text class="stats-label">已启用</text>
+    </view>
+    <view class="stats-divider"></view>
+    <view class="stats-item">
+      <text class="stats-number">{{triggeredToday}}</text>
+      <text class="stats-label">今日触发</text>
+    </view>
+  </view>
+
+  <!-- 筛选选项 -->
+  <view class="filter-options">
+    <view class="filter-tabs">
+      <text class="filter-tab {{filterType === 'all' ? 'active' : ''}}" 
+            bindtap="changeFilter" data-type="all">全部</text>
+      <text class="filter-tab {{filterType === 'active' ? 'active' : ''}}" 
+            bindtap="changeFilter" data-type="active">已启用</text>
+      <text class="filter-tab {{filterType === 'inactive' ? 'active' : ''}}" 
+            bindtap="changeFilter" data-type="inactive">已禁用</text>
+    </view>
+  </view>
+
+  <!-- 提醒列表 -->
+  <view class="alerts-list">
+    <view wx:if="{{loading}}" class="loading">
+      <text>加载中...</text>
+    </view>
+    
+    <view wx:elif="{{filteredAlerts.length === 0}}" class="empty-state">
+      <text class="empty-icon">🔔</text>
+      <text class="empty-text">{{filterType === 'all' ? '还没有设置任何提醒' : '没有符合条件的提醒'}}</text>
+      <view wx:if="{{filterType === 'all'}}" class="empty-action">
+        <view class="action-btn primary" bindtap="goToAddAlert">
+          <text>添加提醒</text>
+        </view>
+      </view>
+    </view>
+    
+    <view wx:else>
+      <view wx:for="{{filteredAlerts}}" wx:key="id" class="alert-card">
+        <!-- 提醒头部 -->
+        <view class="alert-header">
+          <view class="alert-info">
+            <text class="stock-name">{{item.stockName}}</text>
+            <text class="stock-codes">{{item.hCode}} / {{item.aCode}}</text>
+          </view>
+          <view class="alert-status">
+            <switch checked="{{item.enabled}}" 
+                    bindchange="toggleAlert" 
+                    data-id="{{item.id}}" 
+                    color="#1565C0"/>
+          </view>
+        </view>
+
+        <!-- 提醒条件 -->
+        <view class="alert-conditions">
+          <view wx:if="{{item.alertType === 'premium'}}" class="premium-condition">
+            <view class="condition-tag premium">溢价率</view>
+            <text class="condition-text">
+              {{item.premiumCondition === 'above' ? '高于' : '低于'}} {{item.premiumThreshold}}%
+            </text>
+          </view>
+          
+          <view wx:elif="{{item.alertType === 'price'}}" class="price-conditions">
+            <view class="condition-tag price">价格</view>
+            <view class="price-targets">
+              <text wx:if="{{item.priceTargets.hPriceHigh}}" class="target-item">
+                H股 &gt; {{item.priceTargets.hPriceHigh}} HKD
+              </text>
+              <text wx:if="{{item.priceTargets.hPriceLow}}" class="target-item">
+                H股 &lt; {{item.priceTargets.hPriceLow}} HKD
+              </text>
+              <text wx:if="{{item.priceTargets.aPriceHigh}}" class="target-item">
+                A股 &gt; {{item.priceTargets.aPriceHigh}} CNY
+              </text>
+              <text wx:if="{{item.priceTargets.aPriceLow}}" class="target-item">
+                A股 &lt; {{item.priceTargets.aPriceLow}} CNY
+              </text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 提醒设置 -->
+        <view class="alert-settings">
+          <view class="setting-item">
+            <text class="setting-label">提醒时间</text>
+            <text class="setting-value">{{item.timeRange.start}} - {{item.timeRange.end}}</text>
+          </view>
+          <view class="setting-item">
+            <text class="setting-label">重复提醒</text>
+            <text class="setting-value">{{item.repeat ? '是' : '否'}}</text>
+          </view>
+        </view>
+
+        <!-- 提醒历史 -->
+        <view class="alert-history">
+          <text class="history-label">最近触发: {{item.lastTriggered || '从未'}}</text>
+          <text class="history-count">共触发 {{item.triggerCount || 0}} 次</text>
+        </view>
+
+        <!-- 操作按钮 -->
+        <view class="alert-actions">
+          <view class="action-btn-small secondary" bindtap="editAlert" data-alert="{{item}}">
+            <text>编辑</text>
+          </view>
+          <view class="action-btn-small danger" bindtap="deleteAlert" data-id="{{item.id}}">
+            <text>删除</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 添加提醒按钮 -->
+  <view class="add-alert-btn" bindtap="goToAddAlert">
+    <text class="add-icon">➕</text>
+  </view>
+</view>

@@ -1,0 +1,59 @@
+<!--pages/favorites/favorites.wxml-->
+<view class="container">
+  <view class="header">
+    <text class="title">我的收藏</text>
+  </view>
+
+  <!-- 股票列表 -->
+  <view class="stock-list">
+    <view wx:if="{{loading}}" class="loading">
+      <text>加载中...</text>
+    </view>
+    
+    <view wx:elif="{{favoriteStocks.length === 0}}" class="empty-state">
+      <text class="empty-text">暂无收藏股票</text>
+    </view>
+    
+    <view wx:else>
+      <view wx:for="{{favoriteStocks}}" wx:key="id" class="stock-card">
+        <!-- 股票头部信息 -->
+        <view class="stock-header">
+          <view class="stock-info">
+            <text class="stock-name">{{item.name}}</text>
+            <text class="stock-code">{{item.hCode}} / {{item.aCode}}</text>
+          </view>
+          <view class="action-btns">
+            <view class="remove-btn" bindtap="removeFromFavorites" data-stock="{{item}}">移除</view>
+          </view>
+        </view>
+
+        <!-- 价格信息 -->
+        <view class="stock-prices">
+          <view class="price-row">
+            <view class="price-item">
+              <text class="price-label">H股</text>
+              <text class="price-value">{{item.hPrice}} HKD</text>
+            </view>
+            <view class="price-item">
+              <text class="price-label">A股</text>
+              <text class="price-value">{{item.aPrice}} CNY</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 溢价率 -->
+        <view class="premium-rate">
+          <text class="premium-label">HA溢价率</text>
+          <text class="premium-value {{item.premiumRateClass}}">
+            {{item.premiumRate}}%
+          </text>
+        </view>
+
+        <!-- 更新时间 -->
+        <view class="update-time">
+          <text>更新: {{item.updateTime}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,281 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);
+}
+
+/* 全局卡片样式 */
+.card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 32rpx;
+  margin: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+  border: 1px solid #F1F5F9;
+}
+
+/* 全局按钮样式 */
+.btn-primary {
+  background: linear-gradient(135deg, #5A67D8 0%, #667EEA 100%);
+  color: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx 48rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  box-shadow: 0 4rpx 16rpx rgba(90, 103, 216, 0.3);
+  border: none;
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+  color: #64748B;
+  border-radius: 16rpx;
+  padding: 24rpx 48rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  border: 1px solid #E2E8F0;
+}
+
+/* 全局文本颜色 */
+.text-primary {
+  color: #1E293B;
+}
+
+.text-secondary {
+  color: #64748B;
+}
+
+.text-muted {
+  color: #94A3B8;
+}
+
+/* 全局状态颜色 */
+.text-success {
+  color: #059669;
+}
+
+.text-danger {
+  color: #DC2626;
+}
+
+.text-warning {
+  color: #D97706;
+}
+
+/* 全局样式 */
+page {
+  background-color: #f5f5f5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+/* 卡片样式 */
+.card {
+  background: #ffffff;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  margin: 20rpx;
+  padding: 30rpx;
+}
+
+/* 搜索框样式 */
+.search-container {
+  padding: 20rpx;
+  background: #ffffff;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #f8f9fa;
+  border-radius: 50rpx;
+  padding: 20rpx 30rpx;
+  border: 2rpx solid #e9ecef;
+}
+
+.search-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 20rpx;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 按钮样式 */
+.btn-primary {
+  background: #1565C0;
+  color: #ffffff;
+  border-radius: 50rpx;
+  padding: 20rpx 40rpx;
+  font-size: 28rpx;
+  border: none;
+}
+
+.btn-secondary {
+  background: #ffffff;
+  color: #1565C0;
+  border: 2rpx solid #1565C0;
+  border-radius: 50rpx;
+  padding: 20rpx 40rpx;
+  font-size: 28rpx;
+}
+
+/* 股票卡片样式 */
+.stock-card {
+  background: #ffffff;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
+  margin: 20rpx;
+  padding: 30rpx;
+  position: relative;
+}
+
+.stock-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.stock-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.stock-code {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.favorite-btn {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.stock-prices {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.price-item {
+  flex: 1;
+  text-align: center;
+}
+
+.price-label {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.price-value {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.premium-rate {
+  text-align: center;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  background: #f8f9fa;
+}
+
+.premium-label {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.premium-value {
+  font-size: 48rpx;
+  font-weight: 700;
+}
+
+.premium-positive {
+  color: #dc3545;
+}
+
+.premium-negative {
+  color: #28a745;
+}
+
+.premium-neutral {
+  color: #6c757d;
+}
+
+/* 加载状态 */
+.loading {
+  text-align: center;
+  padding: 40rpx;
+  color: #666;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 100rpx 40rpx;
+}
+
+.empty-icon {
+  width: 120rpx;
+  height: 120rpx;
+  margin: 0 auto 30rpx;
+  opacity: 0.3;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+  line-height: 1.5;
+}
+
+/* 工具栏 */
+.toolbar {
+  display: flex;
+  justify-content: space-around;
+  background: #ffffff;
+  padding: 20rpx;
+  border-top: 1rpx solid #e9ecef;
+}
+
+.toolbar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx;
+  border-radius: 12rpx;
+}
+
+.toolbar-icon {
+  width: 48rpx;
+  height: 48rpx;
+  margin-bottom: 10rpx;
+}
+
+.toolbar-text {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 响应式设计 */
+@media (max-width: 750rpx) {
+  .stock-prices {
+    flex-direction: column;
+  }
+  
+  .price-item {
+    margin-bottom: 20rpx;
+  }
+}

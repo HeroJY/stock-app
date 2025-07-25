@@ -1,0 +1,109 @@
+<!--pages/api-status/api-status.wxml-->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="header">
+    <text class="title">API状态监控</text>
+    <text class="subtitle">实时监控股票数据接口状态</text>
+  </view>
+
+  <!-- API状态卡片 -->
+  <view class="status-card">
+    <view class="card-header">
+      <text class="card-title">接口状态</text>
+      <text class="update-time">更新时间: {{lastUpdate}}</text>
+    </view>
+    
+    <view class="status-item">
+      <text class="label">当前数据源:</text>
+      <text class="value primary">{{apiStatus.currentSource}}</text>
+    </view>
+    
+    <view class="status-item">
+      <text class="label">可用数据源:</text>
+      <text class="value">{{apiStatus.availableSources}} 个</text>
+    </view>
+    
+    <view class="status-item">
+      <text class="label">缓存条目:</text>
+      <text class="value">{{apiStatus.cacheStats.total}} 条</text>
+    </view>
+  </view>
+
+  <!-- 缓存详情 -->
+  <view class="cache-card" wx:if="{{apiStatus.cacheStats.total > 0}}">
+    <view class="card-header">
+      <text class="card-title">缓存详情</text>
+    </view>
+    
+    <view class="cache-types">
+      <view class="cache-type" wx:for="{{apiStatus.cacheStats.types}}" wx:key="index">
+        <text class="cache-name">{{index}}:</text>
+        <text class="cache-count">{{item}} 条</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 测试结果 -->
+  <view class="test-card" wx:if="{{testResults.length > 0}}">
+    <view class="card-header">
+      <text class="card-title">测试结果</text>
+    </view>
+    
+    <view class="test-results">
+      <view class="test-item" wx:for="{{testResults}}" wx:key="index">
+        <view class="test-header">
+          <text class="test-name">{{item.name}}</text>
+          <view class="test-status {{item.success ? 'success' : 'error'}}">
+            {{item.success ? '成功' : '失败'}}
+          </view>
+        </view>
+        <view class="test-details">
+          <text class="response-time">响应时间: {{formatResponseTime(item.responseTime)}}</text>
+          <text class="test-info">{{item.details}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="actions">
+    <button class="action-btn primary" bindtap="testAPIs" loading="{{testing}}">
+      {{testing ? '测试中...' : '测试接口'}}
+    </button>
+    
+    <button class="action-btn secondary" bindtap="refreshStatus">
+      刷新状态
+    </button>
+    
+    <button class="action-btn danger" bindtap="clearCache">
+      清除缓存
+    </button>
+  </view>
+
+  <!-- 说明信息 -->
+  <view class="info-card">
+    <view class="card-header">
+      <text class="card-title">说明</text>
+    </view>
+    <view class="info-content">
+      <text class="info-text">• 系统会自动在多个数据源之间切换</text>
+      <text class="info-text">• 缓存可以提高数据加载速度</text>
+      <text class="info-text">• 如遇到数据异常，可尝试清除缓存</text>
+      <text class="info-text">• 测试功能可以检查各接口的可用性</text>
+    </view>
+  </view>
+</view>
+
+<wxs module="utils">
+  var formatResponseTime = function(ms) {
+    if (ms < 1000) {
+      return ms + 'ms'
+    } else {
+      return (ms / 1000).toFixed(2) + 's'
+    }
+  }
+  
+  module.exports = {
+    formatResponseTime: formatResponseTime
+  }
+</wxs>

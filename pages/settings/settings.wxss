@@ -1,0 +1,242 @@
+/* pages/settings/settings.wxss */
+
+.container {
+  background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);
+  min-height: 100vh;
+  padding-bottom: 40rpx;
+}
+
+/* 用户信息卡片 */
+.user-card {
+  margin: 20rpx;
+  display: flex;
+  align-items: center;
+  padding: 40rpx 30rpx;
+  background: linear-gradient(135deg, #1565C0 0%, #1976D2 100%);
+  color: #ffffff;
+}
+
+.user-avatar {
+  margin-right: 30rpx;
+}
+
+.avatar-img {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(255, 255, 255, 0.3);
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-name {
+  font-size: 36rpx;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.user-desc {
+  font-size: 26rpx;
+  opacity: 0.9;
+}
+
+/* 设置分组 */
+.settings-section {
+  margin: 30rpx 20rpx 20rpx;
+}
+
+.section-title {
+  padding: 0 10rpx 20rpx;
+}
+
+.section-title text {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.settings-list {
+  background: #ffffff;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* 设置项 */
+.setting-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  transition: background-color 0.3s;
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-item:active {
+  background: #f8f9fa;
+}
+
+.setting-info {
+  flex: 1;
+}
+
+.setting-label {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.setting-desc {
+  font-size: 24rpx;
+  color: #666;
+  line-height: 1.4;
+}
+
+.setting-value {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.arrow-icon {
+  width: 24rpx;
+  height: 24rpx;
+  margin-left: 15rpx;
+  opacity: 0.6;
+}
+
+.alert-count {
+  color: #FF6B6B;
+  font-weight: 500;
+}
+
+/* 自定义选择器样式 */
+.picker-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+}
+
+.picker-container {
+  width: 100%;
+  background: white;
+  border-radius: 20rpx 20rpx 0 0;
+  overflow: hidden;
+}
+
+.picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30rpx 40rpx;
+  border-bottom: 1rpx solid #E5E5E5;
+  background: #F8F9FA;
+}
+
+.picker-cancel, .picker-confirm {
+  font-size: 32rpx;
+  color: #5A67D8;
+}
+
+.picker-title {
+  font-size: 34rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.picker-view {
+  height: 400rpx;
+}
+
+.picker-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80rpx;
+  font-size: 32rpx;
+  color: #333;
+}
+
+.cache-size {
+  color: #666;
+}
+
+/* 开关样式调整 */
+switch {
+  transform: scale(0.8);
+}
+
+/* 选择器样式 */
+picker {
+  width: 100%;
+}
+
+/* 响应式适配 */
+@media (max-width: 750rpx) {
+  .user-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .user-avatar {
+    margin-right: 0;
+    margin-bottom: 20rpx;
+  }
+  
+  .setting-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .setting-value {
+    margin-top: 15rpx;
+    align-self: flex-end;
+  }
+}
+
+/* 动画效果 */
+.settings-section {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.user-card {
+  animation: slideInDown 0.4s ease-out;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

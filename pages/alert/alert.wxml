@@ -1,0 +1,177 @@
+<!--pages/alert/alert.wxml-->
+<view class="container">
+  <!-- 头部信息 -->
+  <view class="header-card card">
+    <view class="stock-info">
+      <text class="stock-name">{{stockInfo.name}}</text>
+      <text class="stock-codes">{{stockInfo.hCode}} / {{stockInfo.aCode}}</text>
+    </view>
+    <view class="current-data">
+      <text class="current-premium">当前溢价率: {{currentPremiumRate}}%</text>
+    </view>
+  </view>
+
+  <!-- 提醒类型选择 -->
+  <view class="alert-types card">
+    <view class="section-title">
+      <text>提醒类型</text>
+    </view>
+    
+    <view class="type-options">
+      <view class="type-option {{alertType === 'premium' ? 'active' : ''}}" 
+            bindtap="selectAlertType" data-type="premium">
+        <view class="option-icon">
+          <text class="icon">%</text>
+        </view>
+        <view class="option-info">
+          <text class="option-title">溢价率提醒</text>
+          <text class="option-desc">当溢价率达到设定值时提醒</text>
+        </view>
+      </view>
+      
+      <view class="type-option {{alertType === 'price' ? 'active' : ''}}" 
+            bindtap="selectAlertType" data-type="price">
+        <view class="option-icon">
+          <text class="icon">💰</text>
+        </view>
+        <view class="option-info">
+          <text class="option-title">价格提醒</text>
+          <text class="option-desc">当股价达到设定值时提醒</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 溢价率提醒设置 -->
+  <view wx:if="{{alertType === 'premium'}}" class="premium-alert-settings card">
+    <view class="section-title">
+      <text>溢价率提醒设置</text>
+    </view>
+    
+    <view class="alert-conditions">
+      <view class="condition-item">
+        <text class="condition-label">提醒条件</text>
+        <view class="condition-selector">
+          <text class="selector-item {{premiumCondition === 'above' ? 'active' : ''}}" 
+                bindtap="selectPremiumCondition" data-condition="above">高于</text>
+          <text class="selector-item {{premiumCondition === 'below' ? 'active' : ''}}" 
+                bindtap="selectPremiumCondition" data-condition="below">低于</text>
+        </view>
+      </view>
+      
+      <view class="threshold-input">
+        <text class="input-label">目标溢价率</text>
+        <view class="input-container">
+          <input class="threshold-value" 
+                 type="digit" 
+                 placeholder="请输入溢价率" 
+                 value="{{premiumThreshold}}"
+                 bindinput="onPremiumThresholdInput" />
+          <text class="input-unit">%</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 价格提醒设置 -->
+  <view wx:if="{{alertType === 'price'}}" class="price-alert-settings card">
+    <view class="section-title">
+      <text>价格提醒设置</text>
+    </view>
+    
+    <view class="price-targets">
+      <view class="target-section">
+        <text class="target-title">H股价格提醒</text>
+        <view class="price-conditions">
+          <view class="price-condition">
+            <text class="condition-text">高于</text>
+            <input class="price-input" 
+                   type="digit" 
+                   placeholder="目标价格" 
+                   value="{{hPriceHigh}}"
+                   bindinput="onHPriceHighInput" />
+            <text class="price-unit">HKD</text>
+          </view>
+          <view class="price-condition">
+            <text class="condition-text">低于</text>
+            <input class="price-input" 
+                   type="digit" 
+                   placeholder="目标价格" 
+                   value="{{hPriceLow}}"
+                   bindinput="onHPriceLowInput" />
+            <text class="price-unit">HKD</text>
+          </view>
+        </view>
+      </view>
+      
+      <view class="target-section">
+        <text class="target-title">A股价格提醒</text>
+        <view class="price-conditions">
+          <view class="price-condition">
+            <text class="condition-text">高于</text>
+            <input class="price-input" 
+                   type="digit" 
+                   placeholder="目标价格" 
+                   value="{{aPriceHigh}}"
+                   bindinput="onAPriceHighInput" />
+            <text class="price-unit">CNY</text>
+          </view>
+          <view class="price-condition">
+            <text class="condition-text">低于</text>
+            <input class="price-input" 
+                   type="digit" 
+                   placeholder="目标价格" 
+                   value="{{aPriceLow}}"
+                   bindinput="onAPriceLowInput" />
+            <text class="price-unit">CNY</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提醒设置 -->
+  <view class="notification-settings card">
+    <view class="section-title">
+      <text>通知设置</text>
+    </view>
+    
+    <view class="settings-list">
+      <view class="setting-item">
+        <text class="setting-label">启用提醒</text>
+        <switch checked="{{alertEnabled}}" bindchange="onAlertEnabledChange" color="#1565C0"/>
+      </view>
+      
+      <view class="setting-item">
+        <text class="setting-label">重复提醒</text>
+        <switch checked="{{repeatAlert}}" bindchange="onRepeatAlertChange" color="#1565C0"/>
+      </view>
+      
+      <view class="setting-item">
+        <view class="setting-info">
+          <text class="setting-label">提醒时间</text>
+          <text class="setting-desc">仅在指定时间段内提醒</text>
+        </view>
+        <view class="time-range">
+          <picker mode="time" value="{{startTime}}" bindchange="onStartTimeChange">
+            <text class="time-text">{{startTime}}</text>
+          </picker>
+          <text class="time-separator">-</text>
+          <picker mode="time" value="{{endTime}}" bindchange="onEndTimeChange">
+            <text class="time-text">{{endTime}}</text>
+          </picker>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-buttons">
+    <view class="action-btn secondary" bindtap="previewAlert">
+      <text>预览提醒</text>
+    </view>
+    <view class="action-btn primary" bindtap="saveAlert">
+      <text>保存提醒</text>
+    </view>
+  </view>
+</view>
